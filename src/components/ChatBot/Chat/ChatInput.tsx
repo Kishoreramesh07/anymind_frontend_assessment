@@ -29,7 +29,6 @@ export default function ChatInput() {
       <button
         className="flex-1 bg-cyan-500 text-white rounded-sm px-4 py-2"
         onClick={handlePostMessage}
-        disabled={loading}
       >
         Send Message
       </button>

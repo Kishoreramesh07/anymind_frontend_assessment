@@ -13,6 +13,7 @@
       "@Constants/*": ["./src/constants/*"],
       "@GraphQL/*": ["./src/graphql/*"],
       "@Shared/*": ["./src/shared/*"],
+      "@Types/*": ["./src/types/*"],
     },
 
     /* Bundler mode */

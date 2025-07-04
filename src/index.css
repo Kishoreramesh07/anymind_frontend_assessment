@@ -1,1 +1,17 @@
 @import "tailwindcss";
+
+.message::before {
+  content: "";
+  position: absolute;
+  top: 7px;
+  left: -16px;
+  border-width: 8px;
+  border-style: solid;
+  border-color: transparent white transparent transparent;
+}
+
+.messageRight .message::before {
+  left: auto;
+  right: -16px;
+  border-color: transparent transparent transparent white;
+}
