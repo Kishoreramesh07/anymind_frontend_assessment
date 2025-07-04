@@ -1,8 +1,18 @@
-import { createContext, useContext, useState, type ReactNode, type Dispatch, type SetStateAction } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  type ReactNode,
+  type Dispatch,
+  type SetStateAction,
+} from "react";
 import { Channels, type ChannelType } from "@Constants/channels_db";
+import { Users } from "@Constants/users_db";
 
 interface ChannelContextType {
-  Channels: ChannelType[],
+  activeUser: string;
+  setActiveUser: Dispatch<SetStateAction<string>>;
+  Channels: ChannelType[];
   activeChannel: ChannelType;
   setActiveChannel: Dispatch<SetStateAction<ChannelType>>;
 }
@@ -10,10 +20,19 @@ interface ChannelContextType {
 const ChannelContext = createContext<ChannelContextType | undefined>(undefined);
 
 export const ChannelProvider = ({ children }: { children: ReactNode }) => {
+  const [activeUser, setActiveUser] = useState<string>(Users[0]);
   const [activeChannel, setActiveChannel] = useState<ChannelType>(Channels[0]);
 
   return (
-    <ChannelContext.Provider value={{ Channels, activeChannel, setActiveChannel }}>
+    <ChannelContext.Provider
+      value={{
+        activeUser,
+        setActiveUser,
+        Channels,
+        activeChannel,
+        setActiveChannel,
+      }}
+    >
       {children}
     </ChannelContext.Provider>
   );

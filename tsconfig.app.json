@@ -11,6 +11,8 @@
       "@/*": ["./src/*"],
       "@Components/*": ["./src/components/*"],
       "@Constants/*": ["./src/constants/*"],
+      "@GraphQL/*": ["./src/graphql/*"],
+      "@Shared/*": ["./src/shared/*"],
     },
 
     /* Bundler mode */
