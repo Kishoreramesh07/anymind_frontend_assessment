@@ -1,4 +1,4 @@
-import { useChannel } from "@/context/channelContext";
+import { useChannel } from "@Context/channelContext";
 import { Users } from "@Constants/users_db";
 
 export default function User() {

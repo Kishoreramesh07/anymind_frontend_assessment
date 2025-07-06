@@ -1,4 +1,4 @@
-import { useChannel } from "@/context/channelContext";
+import { useChannel } from "@Context/channelContext";
 import { useMutation } from "@apollo/client";
 import { POST_MESSAGE } from "@GraphQL/mutations";
 import { useState } from "react";

@@ -1,6 +1,6 @@
-import { useChannel } from "@/context/channelContext";
+import { useChannel } from "@Context/channelContext";
 import { Avatar, Text, Time } from "./MessageCardElements";
-import type { MessageType } from "@/types/Messages";
+import type { MessageType } from "@Types/Messages";
 
 type MessageProps = { message: MessageType };
 

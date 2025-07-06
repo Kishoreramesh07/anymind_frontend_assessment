@@ -14,6 +14,8 @@
       "@GraphQL/*": ["./src/graphql/*"],
       "@Shared/*": ["./src/shared/*"],
       "@Types/*": ["./src/types/*"],
+      "@Context/*": ["./src/context/*"],
+      "@Helpers/*": ["./src/helpers/*"],
     },
 
     /* Bundler mode */

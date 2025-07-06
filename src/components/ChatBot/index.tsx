@@ -1,6 +1,6 @@
 import { SideBar } from "@Components/ChatBot/SideBar";
 import { Channel } from "@Components/ChatBot/Channel";
-import { ChannelProvider } from "@/context/channelContext";
+import { ChannelProvider } from "@Context/channelContext";
 
 export default function ChatBot() {
   return (

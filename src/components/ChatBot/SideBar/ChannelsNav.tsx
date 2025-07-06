@@ -1,4 +1,4 @@
-import { useChannel } from "@/context/channelContext";
+import { useChannel } from "@Context/channelContext";
 
 export default function ChannelsNav() {
   const { Channels, activeChannel, setActiveChannel } = useChannel();

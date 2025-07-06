@@ -1,4 +1,4 @@
-import type { MessageType } from "@/types/Messages";
+import type { MessageType } from "@Types/Messages";
 
 type TextProps = {
   text: MessageType["text"];

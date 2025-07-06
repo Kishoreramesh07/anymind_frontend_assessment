@@ -1,18 +1,10 @@
-import { useChannel } from "@/context/channelContext";
 import Spinner from "@Shared/Spinner";
-import { useQuery } from "@apollo/client";
-import { FETCH_LATEST_MESSAGES } from "@GraphQL/queries";
 import ChatInput from "./ChatInput";
 import Messages from "./Messages";
+import useChannelMessage from "@/hooks/useChannelMessage";
 
 export function Chat() {
-  const {
-    activeChannel: { id: channelId },
-  } = useChannel();
-
-  const { loading, error, data } = useQuery(FETCH_LATEST_MESSAGES, {
-    variables: { channelId },
-  });
+  const { loading, error, messages }= useChannelMessage();
 
   if (loading) {
     return (
@@ -24,7 +16,7 @@ export function Chat() {
 
   return (
     <div className="p-4">
-      <Messages messages={data?.fetchLatestMessages} />
+      <Messages messages={messages}/>
       <ChatInput />
     </div>
   );
