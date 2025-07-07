@@ -4,6 +4,7 @@ import { useQuery } from "@apollo/client";
 import { FETCH_LATEST_MESSAGES } from "@GraphQL/queries";
 import { useEffect } from "react";
 import { sortMessagesByTime } from "@Helpers/index";
+import type { MessageType } from "@/types/Messages";
 
 export default function useChannelMessage() {
   const { messageStore, setMessageStore } = useMessageStore();
@@ -23,10 +24,13 @@ export default function useChannelMessage() {
     );
 
     if (!existingChannel && data?.fetchLatestMessages) {
-      setMessageStore((prev) => [
-        ...prev,
-        { channelId, messages: sortMessagesByTime(data.fetchLatestMessages) },
-      ]);
+      const messages = sortMessagesByTime(
+        data.fetchLatestMessages.map((message: MessageType) => ({
+          ...message,
+          status: "sent",
+        }))
+      );
+      setMessageStore((prev) => [...prev, { channelId, messages }]);
     }
   }, [data, loading, channelId, messageStore, setMessageStore]);
 

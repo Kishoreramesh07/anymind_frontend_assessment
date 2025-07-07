@@ -1,7 +1,7 @@
 import { useChannel } from "@Context/channelContext";
-import { useMutation } from "@apollo/client";
+import { ApolloError, useMutation } from "@apollo/client";
 import { POST_MESSAGE } from "@GraphQL/mutations";
-import { useState, type KeyboardEvent } from "react";
+import { useRef, useState, type KeyboardEvent } from "react";
 import { useMessageStore } from "@Context/MessageStore";
 import type { MessageType } from "@Types/Messages";
 
@@ -13,9 +13,54 @@ export default function ChatInput() {
   } = useChannel();
   const { setMessageStore } = useMessageStore();
 
-  const [postMessage, { loading, error, data }] = useMutation(POST_MESSAGE);
+  const messageRef = useRef<MessageType | null>(null);
 
-  const handlePostMessage = () => {
+  const handleSuccess = (data: { postMessage: MessageType }) => {
+    const newMessage = messageRef.current;
+    if (!newMessage) return;
+
+    setMessageStore((prev) =>
+      prev.map((channel) =>
+        channel.channelId === channelId
+          ? {
+              ...channel,
+              messages: channel.messages.map((msg) =>
+                msg.messageId === newMessage.messageId
+                  ? { ...msg, ...data.postMessage, status: "sent" }
+                  : msg
+              ),
+            }
+          : channel
+      )
+    );
+  };
+
+  const handleError = (error: ApolloError) => {
+    const newMessage = messageRef.current;
+    if (!newMessage) return;
+
+    setMessageStore((prev) =>
+      prev.map((channel) =>
+        channel.channelId === channelId
+          ? {
+              ...channel,
+              messages: channel.messages.map((msg) =>
+                msg.messageId === newMessage.messageId
+                  ? { ...msg, status: "error", error }
+                  : msg
+              ),
+            }
+          : channel
+      )
+    );
+  };
+
+  const [postMessage, { loading }] = useMutation(POST_MESSAGE, {
+    onCompleted: handleSuccess,
+    onError: handleError,
+  });
+
+  const handlePostMessage = async () => {
     if (!userText.length) return;
 
     const newMessage: MessageType = {
@@ -23,8 +68,12 @@ export default function ChatInput() {
       text: userText,
       userId: activeUser,
       datetime: new Date(),
+      status: "pending",
     };
 
+    messageRef.current = newMessage;
+
+    // Update message in real time to chats
     setMessageStore((prevStore) => {
       const channelExists = prevStore.find(
         ({ channelId: id }) => id === channelId
@@ -53,7 +102,7 @@ export default function ChatInput() {
     });
 
     postMessage({
-      variables: { channelId, text: userText, userId: activeUser },
+      variables: { channelId, text: userText, userId: `activeUser` },
     });
 
     setUserText("");

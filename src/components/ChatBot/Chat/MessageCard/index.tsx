@@ -1,12 +1,13 @@
 import { useChannel } from "@Context/channelContext";
 import { Avatar, Text, Time } from "./MessageCardElements";
 import type { MessageType } from "@Types/Messages";
+import Status from "./MessageCardElements/Status";
 
 type MessageProps = { message: MessageType };
 
 export default function MessageCard({ message }: MessageProps) {
   const { activeUser } = useChannel();
-  const { datetime, text, userId } = message;
+  const { datetime, text, userId, status } = message;
   const isActiveUser = userId === activeUser;
 
   return (
@@ -22,6 +23,9 @@ export default function MessageCard({ message }: MessageProps) {
         }`}
       >
         <Text text={text} />
+        {isActiveUser && (
+          <Status status={status}/>
+        )}
         <Time datetime={datetime} />
       </div>
     </div>

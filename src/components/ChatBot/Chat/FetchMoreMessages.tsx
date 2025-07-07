@@ -23,7 +23,13 @@ export default function FetchMoreMessages({ old }: FetchMoreMessagesProps) {
   };
 
   const handleCompleted = (data: { fetchMoreMessages: MessageType[] }) => {
-    const fetchedMessages = data?.fetchMoreMessages;
+    const fetchedMessages = data?.fetchMoreMessages.map(
+      (message: MessageType) => ({
+        ...message,
+        status: "sent",
+      })
+    );
+    
     if (!fetchedMessages?.length) return;
 
     setMessageStore((prev) => {
