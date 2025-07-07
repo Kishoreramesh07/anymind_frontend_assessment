@@ -6,7 +6,8 @@ import { useMessageStore } from "@Context/MessageStore";
 import type { MessageType } from "@Types/Messages";
 
 export default function ChatInput() {
-  const [userText, setUserText] = useState("");
+  const localUserText = localStorage.getItem("userText");
+  const [userText, setUserText] = useState(localUserText !== null ? localUserText : "");
   const {
     activeChannel: { id: channelId },
     activeUser,
@@ -102,7 +103,7 @@ export default function ChatInput() {
     });
 
     postMessage({
-      variables: { channelId, text: userText, userId: `activeUser` },
+      variables: { channelId, text: userText, userId: activeUser },
     });
 
     setUserText("");
@@ -121,7 +122,10 @@ export default function ChatInput() {
         placeholder="Type your message here..."
         className="bg-white flex-5 border border-slate-300 rounded-sm h-15 p-2"
         value={userText}
-        onChange={({ target: { value } }) => setUserText(value)}
+        onChange={({ target: { value } }) => {
+          setUserText(value);
+          localStorage.setItem("userText", value);
+        }}
         onKeyDown={(event) => handleUserInput(event)}
       />
       <button

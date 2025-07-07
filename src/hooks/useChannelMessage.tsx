@@ -12,7 +12,7 @@ export default function useChannelMessage() {
     activeChannel: { id: channelId },
   } = useChannel();
 
-  const { loading, error, data } = useQuery(FETCH_LATEST_MESSAGES, {
+  const { loading, error, data, refetch } = useQuery(FETCH_LATEST_MESSAGES, {
     variables: { channelId },
   });
 
@@ -37,5 +37,5 @@ export default function useChannelMessage() {
   const activeChannelMessages =
     messageStore?.find(({ channelId: id }) => id === channelId)?.messages || [];
 
-  return { loading, error, messages: activeChannelMessages };
+  return { loading, error, messages: activeChannelMessages, refetch };
 }
