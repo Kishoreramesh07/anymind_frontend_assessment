@@ -1,5 +1,6 @@
 import type { MessageType } from "@Types/Messages";
 import MessageCard from "./MessageCard";
+import FetchMoreMessages from "./FetchMoreMessages";
 
 type MessagesProps = { messages: MessageType[] };
 
@@ -13,14 +14,13 @@ export default function Messages({ messages }: MessagesProps) {
 
   return (
     <>
-      <div>
-        <button className="flex-1 bg-cyan-500 text-white rounded-sm px-4 py-2 hover:bg-cyan-600 cursor-pointer">
-          Fetch More
-        </button>
+      <FetchMoreMessages old={true} />
+      <div className="messageCardsWrapper mt-auto">
+        {messages.map((message) => (
+          <MessageCard key={message?.messageId} message={message} />
+        ))}
       </div>
-      {messages.map((message) => (
-        <MessageCard key={message?.messageId} message={message} />
-      ))}
+      <FetchMoreMessages old={false} />
     </>
   );
 }

@@ -2,12 +2,11 @@ import { useMessageStore } from "@Context/MessageStore";
 import { useChannel } from "@Context/channelContext";
 import { useQuery } from "@apollo/client";
 import { FETCH_LATEST_MESSAGES } from "@GraphQL/queries";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect } from "react";
 import { sortMessagesByTime } from "@Helpers/index";
 
 export default function useChannelMessage() {
   const { messageStore, setMessageStore } = useMessageStore();
-  const [activeChannelMessages, setActiveChannelMessages] = useState<any>();
   const {
     activeChannel: { id: channelId },
   } = useChannel();
@@ -31,12 +30,8 @@ export default function useChannelMessage() {
     }
   }, [data, loading, channelId, messageStore, setMessageStore]);
 
-  useEffect(() => {
-    const activeChannelMessages =
-      messageStore?.find(({ channelId: id }) => id === channelId)?.messages ||
-      [];
-    setActiveChannelMessages(activeChannelMessages);
-  }, [messageStore, channelId]);
+  const activeChannelMessages =
+    messageStore?.find(({ channelId: id }) => id === channelId)?.messages || [];
 
   return { loading, error, messages: activeChannelMessages };
 }

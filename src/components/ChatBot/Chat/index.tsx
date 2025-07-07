@@ -16,7 +16,7 @@ export function Chat() {
 
   return (
     <>
-      <div className="p-4 messageWrapper">
+      <div className="p-4 messageWrapper flex flex-col justify-between">
         <Messages messages={messages} />
       </div>
       <ChatInput />
