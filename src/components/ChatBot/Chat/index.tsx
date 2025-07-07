@@ -4,20 +4,22 @@ import Messages from "./Messages";
 import useChannelMessage from "@/hooks/useChannelMessage";
 
 export function Chat() {
-  const { loading, error, messages }= useChannelMessage();
+  const { loading, error, messages } = useChannelMessage();
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-100">
+      <div className="flex justify-center items-center h-100 messageWrapper">
         <Spinner />
       </div>
     );
   }
 
   return (
-    <div className="p-4">
-      <Messages messages={messages}/>
+    <>
+      <div className="p-4 messageWrapper">
+        <Messages messages={messages} />
+      </div>
       <ChatInput />
-    </div>
+    </>
   );
 }

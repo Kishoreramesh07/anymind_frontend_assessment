@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+.messageWrapper{
+  height: 72vh;
+  overflow-y: auto;
+}
+
 .message::before {
   content: "";
   position: absolute;

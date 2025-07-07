@@ -1,3 +1,4 @@
+import { formatTime } from "@Helpers/index";
 import type { MessageType } from "@Types/Messages";
 
 type TimeProps = {
@@ -5,14 +6,9 @@ type TimeProps = {
 };
 
 export function Time({ datetime }: TimeProps) {
-  const time = new Date(datetime).toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-  
   return (
     <p className="text-sm text-gray-500" aria-label="Message time">
-      {time}
+      {formatTime(datetime)}
     </p>
   );
 }
