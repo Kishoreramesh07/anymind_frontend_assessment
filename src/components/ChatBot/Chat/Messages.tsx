@@ -15,7 +15,7 @@ export default function Messages({ messages }: MessagesProps) {
   return (
     <>
       <FetchMoreMessages old={true} />
-      <div className="messageCardsWrapper mt-auto">
+      <div className="messageCardsWrapper mt-auto pb-2">
         {messages.map((message) => (
           <MessageCard key={message?.messageId} message={message} />
         ))}
