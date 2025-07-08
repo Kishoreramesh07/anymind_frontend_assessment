@@ -117,7 +117,7 @@ export default function ChatInput() {
   };
 
   return (
-    <div className="flex gap-2 items-start">
+    <div className="flex gap-2 items-start p-3">
       <textarea
         placeholder="Type your message here..."
         className="bg-white flex-5 border border-slate-300 rounded-sm h-15 p-2"

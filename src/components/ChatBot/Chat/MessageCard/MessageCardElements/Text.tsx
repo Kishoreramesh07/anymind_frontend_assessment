@@ -5,5 +5,5 @@ type TextProps = {
 };
 
 export function Text({ text }: TextProps) {
-  return <p className="relative message bg-white p-3 rounded-sm">{text}</p>;
+  return <p className="relative message bg-white p-3 rounded-sm max-w-95">{text}</p>;
 }

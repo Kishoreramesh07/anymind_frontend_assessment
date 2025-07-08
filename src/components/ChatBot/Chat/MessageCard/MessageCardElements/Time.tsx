@@ -7,7 +7,7 @@ type TimeProps = {
 
 export function Time({ datetime }: TimeProps) {
   return (
-    <p className="text-sm text-gray-500" aria-label="Message time">
+    <p className="text-sm" aria-label="Message time">
       {formatTime(datetime)}
     </p>
   );

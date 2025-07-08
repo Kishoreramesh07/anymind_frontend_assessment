@@ -39,7 +39,7 @@ export default function Status({ status }: StatusProps) {
         icon={statusInfo?.icon}
         className={`${statusInfo?.color} text-sm`}
       />
-      <p className="text-xs text-gray-500">{status}</p>
+      <p className="text-xs text-slate-500">{status}</p>
     </div>
   );
 }

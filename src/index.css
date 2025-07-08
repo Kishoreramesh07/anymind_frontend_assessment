@@ -1,6 +1,10 @@
+@import url("https://fonts.cdnfonts.com/css/segoe-ui-4");
 @import "tailwindcss";
 
-.messageWrapper{
+body {
+  font-family: "Segoe UI", sans-serif;
+}
+.messageWrapper {
   height: 72vh;
   overflow-y: auto;
 }
