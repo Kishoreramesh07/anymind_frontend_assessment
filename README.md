@@ -19,4 +19,4 @@ Follow these steps to run the project on your local machine:
    ```bash
    npm run dev
 
-[Deployed link](https://onedaychat.netlify.app/)
+[Deployed link](https://kishore-onedaychat.netlify.app/)
